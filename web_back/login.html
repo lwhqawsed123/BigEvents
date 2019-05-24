@@ -9,6 +9,10 @@
     <link rel="stylesheet" type="text/css" href="css/reset.css">
     <link rel="stylesheet" type="text/css" href="css/iconfont.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
+    <script src="./js/jquery-1.12.4.min.js"></script>
+    <link rel="stylesheet" href="./js/bootstrap/css/bootstrap.min.css">
+    <script src="./js/bootstrap/js/bootstrap.min.js"></script>
+
 </head>
 
 <body>
@@ -25,44 +29,72 @@
                 <i class="iconfont icon-key"></i>
                 <input type="text" class="input_txt" placeholder="邮箱/手机号">
                 <input type="password" class="input_pass" placeholder="密码">
-                <input type="submit" class="input_sub" value="登 录">
+                <input type="submit" class="input_sub" value="登 录" data-target="#myModal">
             </form>
         </div>
 
-    </div> 
-
+    </div>
+    <!-- 弹出模态框 -->
+    <!-- 需要给最外层div加上  id="myModal" aria-labelledby="myModalLabel"  -->
+    <div class="modal fade" tabindex="-1" role="dialog" id="myModal" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">提示!!</h4>
+                </div>
+                <div class="modal-body">
+                    <p>请输入账号密码&hellip;</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary">确认</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <!-- 模态框结束 -->
 </body>
 
 </html>
-<script src="./js/jquery-1.12.4.min.js"></script>
+
 <script>
-$(function(){
-    $(".input_sub").click(function(e){
-        e.preventDefault();
-        var user_name=$(".input_txt").val().trim();
-        var password=$(".input_pass").val().trim();
-        if(user_name==""||password==""){
-            alert("请输入账号密码");
-            return;
-        };
-        $.ajax({
-            url:"https://autumnfish.cn/big/admin/login",
-            type:"post",
-            data:{
-                user_name:user_name,
-                password:password
-            },
-            success:function(backData){
-                if(backData.code==200){
-                    window.location="./index.html"
-                }else if(backData.code==400){
-                    alert("用户名或密码错误,请重新输入");
-                    return;
+    $(function () {
+        $(".input_sub").click(function (e) {
+            e.preventDefault();
+            var user_name = $(".input_txt").val().trim();
+            var password = $(".input_pass").val().trim();
+            if (user_name == "" || password == "") {
+                // alert("请输入账号密码");
+                $(".modal-body").text("请输入账号和密码...");
+                $(".btn-primary").css("display", "none");
+                $(".btn-default").text("确认").css("backgroundColor","skyblue")
+                $("#myModal").modal();
+                return;
+            };
+            $.ajax({
+                url: "https://autumnfish.cn/big/admin/login",
+                type: "post",
+                data: {
+                    user_name: user_name,
+                    password: password
+                },
+                success: function (backData) {
+                    if (backData.code == 200) {
+                        window.location = "./index.html"
+                    } else if (backData.code == 400) {
+                        // alert("用户名或密码错误,请重新输入");
+                        $(".modal-body").text("用户名或密码错误,请重新输入!");
+                        $(".btn-primary").css("display", "none");
+                        $(".btn-default").text("确认").css("backgroundColor","skyblue")
+                        $("#myModal").modal();
+                        return;
+                    }
                 }
-            }
+            })
         })
+
     })
-})
 
 
 </script>
