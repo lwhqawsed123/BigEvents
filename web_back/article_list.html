@@ -292,17 +292,20 @@
     $(function () { 
         $("#btnMax").click(function(e){    //测试:给发表文章添加一个点击事件,之后需要删除这个事件
             e.preventDefault();
+            console.log(111);
             $.ajax({
                 url:"https://autumnfish.cn/big/search",
                 type:"get",
                 data:{
-                    key:"",
+                    key:"今天",
                     type:"",
                     page:1,
                     perpage:7
                 },
                 success:function(backData){
+                    
                     console.log(backData);
+                    
                     
                 }
             })
