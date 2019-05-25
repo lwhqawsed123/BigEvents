@@ -19,7 +19,7 @@
         <a href="#" class="logo"><img src="images/logo02.png" alt="logo"></a>
         <div class="user_info">
             <img src="images/2.jpg" alt="person">
-            <span>欢迎&nbsp;&nbsp;李思思</span>
+            <span>欢迎&nbsp;&nbsp;<i>李思思</i></span>
             <b>管理员</b>
         </div>
         <div class="menu">
@@ -127,6 +127,7 @@
 
 </html>
 <script>
+    // https://autumnfish.cn/big
     $(function () {
         //首页退出登录功能
         $(".icon-tuichu").parent().click(function () {
@@ -141,35 +142,19 @@
                 })
             })
         })
-        // var Categories=$("#selCategory")
-        // $("#selCategory").click(function(){
-        //     Categories=$(this).val();
-        //     console.log(Categories);
-            
-        // })
-        //文章搜索功能
-        // $(".icon-search").click(function(){
-        //     // var Categories=""
-        //     var Categories=$("#selCategory").val();
-        //     console.log(Categories);
-            
-        //     var text=$(".search_form input").val();
-        //     var type=$("#selCategory").find("option:selected").text();
-        //     console.log(type);
-            
-            // $.ajax({
-            //     url:"https://autumnfish.cn/big/search",
-            //     type:"get",
-            //     data:{
-            //         key:text,
-            //         type:type
-            //     },
-            //     success:function(backData){
-            //         console.log(backData);
-                    
-            //     }
-            // })
-        // })
+       
+        //更改首页用户头像,昵称 ,右上角的头像
+        $.ajax({
+            url:"https://autumnfish.cn/big/admin/userinfo_get",
+            type:"get",
+            success:function(backData){
+                console.log(backData);
+                
+                $(".user_info i").text(backData.data.nickname);
+                $(".user_info img").attr("src",backData.data.user_pic);
+                $(".user_center_link img").attr("src",backData.data.user_pic);
+            }
+        })
     })
 
 
