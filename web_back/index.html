@@ -127,17 +127,50 @@
 
 </html>
 <script>
-    $(".icon-tuichu").parent().click(function(){
-        $("#myModal").modal();
-        $(".btn-primary").click(function(){
-            $.ajax({
-                url:"https://autumnfish.cn/big/admin/logout",
-                type:"post",
-                success:function(){
-                    window.location="./login.html"
-                }
+    $(function () {
+        //首页退出登录功能
+        $(".icon-tuichu").parent().click(function () {
+            $("#myModal").modal();
+            $(".btn-primary").click(function () {
+                $.ajax({
+                    url: "https://autumnfish.cn/big/admin/logout",
+                    type: "post",
+                    success: function () {
+                        window.location = "./login.html"
+                    }
+                })
             })
         })
+        // var Categories=$("#selCategory")
+        // $("#selCategory").click(function(){
+        //     Categories=$(this).val();
+        //     console.log(Categories);
+            
+        // })
+        //文章搜索功能
+        // $(".icon-search").click(function(){
+        //     // var Categories=""
+        //     var Categories=$("#selCategory").val();
+        //     console.log(Categories);
+            
+        //     var text=$(".search_form input").val();
+        //     var type=$("#selCategory").find("option:selected").text();
+        //     console.log(type);
+            
+            // $.ajax({
+            //     url:"https://autumnfish.cn/big/search",
+            //     type:"get",
+            //     data:{
+            //         key:text,
+            //         type:type
+            //     },
+            //     success:function(backData){
+            //         console.log(backData);
+                    
+            //     }
+            // })
+        // })
     })
+
 
 </script>
