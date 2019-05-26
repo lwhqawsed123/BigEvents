@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="css/iconfont.css">
     <link rel="stylesheet" href="css/main.css">
     <script src="js/jquery-1.12.4.min.js"></script>
+    <script src="./js/template-web.js"></script>
 </head>
 
 <body>
@@ -45,7 +46,7 @@
             <table class="table table-striped table-bordered table-hover mp20">
                 <thead>
                     <tr>
-                        <th id="btnMax">标题</th>
+                        <th>标题</th>
                         <th>作者</th>
                         <th>分类</th>
                         <th class="text-center">发表时间</th>
@@ -267,7 +268,34 @@
 
         </div>
     </div>
-
+    <!-- <script id="tempCate" type="text/html">
+        {{each data}}
+            <tr>
+                <td>{{$value.name}}</td>
+                <td>{{$value.slug}}</td>
+                <td class="text-center">
+                    <a href="javascript:editTr({&quot;id&quot;:&quot;4&quot;,&quot;slug&quot;:&quot;travel&quot;,&quot;name&quot;:&quot;爱旅行&quot;});"
+                        class="btn btn-info btn-xs">编辑</a>
+                    <a href="javascript:deleteTr( 4 );" class="btn btn-danger btn-xs">删除</a>
+                </td>
+            </tr>
+        {{/each}}
+    </script> -->
+    <script id="tempCate" type="text/html">
+        {{each data}}
+            <tr>
+                <td>{{$value.title}}</td>
+                <td>杰克</td>
+                <td>{{$value.type}}</td>
+                <td class="text-center">{{$value.date}}</td>
+                <td class="text-center">{{$value.state}}</td>
+                <td class="text-center">
+                    <a href="article_edit.html" class="btn btn-default btn-xs">编辑</a>
+                    <a href="javascript:" class="btn btn-danger btn-xs btn-delete" article_id="{{$value.id}}">删除</a>
+                </td>
+            </tr>
+        {{/each}}
+    </script>
     <script>
         // 设置左侧菜单
         $('#release_btn').click(function () {
@@ -279,45 +307,142 @@
 
 </html>
 <script>
-    $(function(){
-        var Categories=$("#selCategory")
-        $("#selCategory").click(function(){
-            Categories=$(this).val();
-            console.log(Categories);
-            
-        })
-    })
-    $(function () {
-        var Categories = $("#selCategory")
-        $("#selCategory").click(function () {
-            Categories = $(this).val();
-            console.log(Categories);
+    // $(function () {
+    //     var Categories = $("#selCategory")
+    //     $("#selCategory").click(function () {
+    //         Categories = $(this).val();
 
-        })
-    })
+    //     })
+    // })
+    // $(function () {
+    //     var state = $("#selStatus")
+    //     $("#selStatus").click(function () {
+    //         state = $(this).val();
+    //         console.log(state);
+    //     })
+    // })
 </script>
 <script>
-    $(function () { 
-        $("#btnMax").click(function(e){    //测试:给发表文章添加一个点击事件,之后需要删除这个事件
-            e.preventDefault();
-            console.log(111);
+    $(function () {
+        //下拉框被点击时,记录当前点击的value值
+        // var Categories = $("#selCategory")
+        var Categories = ""
+        $("#selCategory").click(function () {
+            Categories = $(this).val();
+            if (Categories == "所有分类") {
+                Categories = "";
+            }
+        })
+        // var state = $("#selStatus")
+        var state = ""
+        $("#selStatus").click(function () {
+            state = $(this).val();
+            if (state == "所有状态") {
+                state = "";
+            }
+        })
+
+        //=================筛选功能完成================================
+        // 封装请求函数
+        function setAjax() {
             $.ajax({
-                url:"https://autumnfish.cn/big/search",
+                url: "https://autumnfish.cn/big/admin/search",
+                type: "get",
+                data: {
+                    key: "",
+                    type: Categories,
+                    state: state,
+                    page: 1,
+                    perpage: 6
+                },
+                success: function (backData) {
+                    //设置文章内容
+                    var html = template("tempCate", backData);
+                    $("tbody").html(html);
+                }
+            })
+        };
+        setAjax();  //页面加载时执行一次请求
+
+        //数组去重函数
+        function uniq(array) {
+            var temp = [];
+            var index = [];
+            var l = array.length;
+            for (var i = 0; i < l; i++) {
+                for (var j = i + 1; j < l; j++) {
+                    if (array[i] == array[j]) {
+                        i++;
+                        j = i;
+                    }
+                }
+                temp.push(array[i]);
+                index.push(i);
+            }
+            return temp;
+        }
+
+
+        //获取所有的分类,并添加到所有分类
+        $.ajax({
+            url: "https://autumnfish.cn/big/admin/search",
+            type: "get",
+            data: {
+            },
+            success: function (backData) {
+                //获取并设置所有的文章类别
+                var arr = [];
+                var arr1 = [];
+                for (var i = 0; i < backData.data.length; i++) {
+                    arr.push(backData.data[i].type);
+                    arr1.push(backData.data[i].state);
+                }
+                arr = uniq(arr);
+                var html = "<option>所有分类</option>";
+                for (var i = 0; i < arr.length; i++) {
+                    html += "<option>" + arr[i] + "</option>"
+                }
+                $("#selCategory").html(html);
+
+                //获取并设置所有的文章发布状态
+                arr1 = uniq(arr1);
+                var html = "<option>所有状态</option>";
+                for (var i = 0; i < arr1.length; i++) {
+                    html += "<option>" + arr1[i] + "</option>"
+                }
+                $("#selStatus").html(html);
+            }
+        })
+
+        //筛选按钮点击时,把下拉框的value传入ajax请求函数中
+        $("#btnSearch").click(function (e) {
+            e.preventDefault();
+
+            // 提交ajax请求,并设置数据
+            setAjax()
+        })
+        //=================筛选功能完成================================
+
+        //=================删除文章功能开始==================================
+       
+        $(".table-bordered tbody").on("click",".btn-delete",function(){
+            var id=Number($(this).attr("article_id"));
+            $.ajax({
+                url:"https://autumnfish.cn/big/admin/article_delete",
                 type:"get",
                 data:{
-                    key:"今天",
-                    type:"",
-                    page:1,
-                    perpage:7
+                    id:id
                 },
                 success:function(backData){
-                    
-                    console.log(backData);
-                    
+                    if(backData.code==200){
+                        console.log(backData.msg);
+                        setAjax(); //删除完之后重新请求数据,再渲染一次
+                    }
                     
                 }
             })
         })
+        // ================删除文章结束
     })
 
 </script>
