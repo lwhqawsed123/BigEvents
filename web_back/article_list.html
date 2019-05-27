@@ -323,6 +323,7 @@
     // })
 </script>
 <script>
+    //==============================================
     $(function () {
         //下拉框被点击时,记录当前点击的value值
         // var Categories = $("#selCategory")
@@ -346,7 +347,7 @@
         // 封装请求函数
         function setAjax() {
             $.ajax({
-                url: "https://autumnfish.cn/big/admin/search",
+                url: "http://localhost:8000/admin/search",
                 type: "get",
                 data: {
                     key: "",
@@ -385,7 +386,7 @@
 
         //获取所有的分类,并添加到所有分类
         $.ajax({
-            url: "https://autumnfish.cn/big/admin/search",
+            url: "http://localhost:8000/admin/search",
             type: "get",
             data: {
             },
@@ -428,7 +429,7 @@
         $(".table-bordered tbody").on("click",".btn-delete",function(){
             var id=Number($(this).attr("article_id"));
             $.ajax({
-                url:"https://autumnfish.cn/big/admin/article_delete",
+                url:"http://localhost:8000/admin/article_delete",
                 type:"get",
                 data:{
                     id:id

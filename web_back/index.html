@@ -134,7 +134,7 @@
             $("#myModal").modal();
             $(".btn-primary").click(function () {
                 $.ajax({
-                    url: "https://autumnfish.cn/big/admin/logout",
+                    url: "http://localhost:8000/admin/logout",
                     type: "post",
                     success: function () {
                         window.location = "./login.html"
@@ -159,7 +159,7 @@
         //     console.log(type);
             
             // $.ajax({
-            //     url:"https://autumnfish.cn/big/search",
+            //     url:"http://localhost:8000/search",
             //     type:"get",
             //     data:{
             //         key:text,
@@ -174,7 +174,7 @@
        
         //更改首页用户头像,昵称 ,右上角的头像
         $.ajax({
-            url:"https://autumnfish.cn/big/admin/userinfo_get",
+            url:"http://localhost:8000/admin/userinfo_get",
             type:"get",
             success:function(backData){
                 console.log(backData);

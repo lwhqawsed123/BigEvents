@@ -40,7 +40,7 @@
                 <div class="form-group">
                     <label for="inputEmail3" class="col-sm-2 control-label">文章类别：</label>
                     <div class="col-sm-4">
-                        <select class="form-control">
+                        <select class="form-control categories_change">
                             <option>类别一</option>
                             <option>类别二</option>
                             <option>类别三</option>
@@ -77,7 +77,25 @@
             </form>
         </div>
     </div>
+    <script>
+        //编辑文章
+        $(function(){
+            //提交功能与发布文章一样
 
+            //文章标题
+            var title=$("#inputEmail3").val();
+            //文章封面
+            var file;
+            //文章类别
+            var categories=$("categories_change").val();
+            //文章发布时间
+            var date=$("#dateinput").val();
+            //文章内容
+            var article_content=$("#rich_content").val();
+
+            })
+    
+    </script>
 </body>
 
 </html>

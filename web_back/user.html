@@ -72,7 +72,7 @@
             //封装请求数据的函数
             function setAjax(){
                 $.ajax({
-                url: "https://autumnfish.cn/big/admin/userinfo_get",
+                url: "http://localhost:8000/admin/userinfo_get",
                 type: "get",
                 success: function (backData) {
                     for (var key in backData.data) {        // for in遍历响应数据的data
@@ -85,12 +85,13 @@
            //页面打开时,先从服务器请求一次数据
             setAjax()
 
+            //点击按钮提交用户信息
             $(".btn-success").click(function (e) {
                 e.preventDefault();
                 $(".xiugai").text("")
                 var form=new FormData($("form")[0]); //FormData 是dom对象的方法,所以jQ对象要用 $("form")[0] 转成dom对象
                 $.ajax({
-                    url:"https://autumnfish.cn/big/admin/userinfo_edit",
+                    url:"http://localhost:8000/admin/userinfo_edit",
                     type:"post",
                     data:form,
                     contentType:false,
@@ -99,12 +100,9 @@
                         if(backData.code==200){ //如果返回值的code==200,表示上传成功
                             $(".xiugai").text("修改成功!")  //正确提示
                         }
-                        
                     }
-                    
                 })
                 setAjax();//上传完之后,调用一次函数,
-                
             })
 
             //上传文件,change 事件

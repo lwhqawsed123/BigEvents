@@ -139,12 +139,13 @@
                 <td class="text-center">
                     <a href="javascript:editTr({&quot;id&quot;:&quot;4&quot;,&quot;slug&quot;:&quot;travel&quot;,&quot;name&quot;:&quot;爱旅行&quot;});"
                         class="btn btn-info btn-xs">编辑</a>
-                    <a href="javascript:deleteTr( 4 );" class="btn btn-danger btn-xs">删除</a>
+                    <a href="javascript:" Categories_id="{{$value.id}}" class="btn btn-danger btn-xs Categories_del">删除</a>
                 </td>
             </tr>
         {{/each}}
     </script>
     <script>
+        //===========删除文章类别=============
         /*
          获取文章分类信息
            请求地址：https://autumnfish.cn/big32/admin/category_search
@@ -186,7 +187,7 @@
 
             setAjax();  //页面加载时执行一次请求
 
-            //点击新增文章按钮事件
+            //点击新增文章类别按钮事件
             $("#model_add").click(function(){
                 var name=$("#rec-name").val().trim();   //去除文章名字前后的空格
                 var slug=$("#rec-slug").val().trim();   //去除文章类别前后的空格
@@ -205,14 +206,29 @@
                             if(backData.code==200){     //如果返回值200正常
                                 setAjax();      //再调用一次请求事件
                             }
-                            
-                            
                         }
                     })
                 }
-                
             })
 
+            //点击删除当前文章类别
+            $(".category_table tbody").on("click",".Categories_del",function(e){
+                e.preventDefault()
+                var id=Number($(this).attr("Categories_id"));
+                console.log(id);
+                
+                $.ajax({
+                    url:"http://localhost:8000/admin/category_delete",
+                    type:"post",
+                    data:{
+                        id:id
+                    },
+                    success:function(backData){
+                        console.log(backData);
+                        setAjax();
+                    }
+                })
+            })
         })
 
 

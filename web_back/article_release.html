@@ -15,6 +15,7 @@
     <script src="js/jedate/js/jedate.js"></script>
     <script src="js/tinymce/js/tinymce/tinymce.min.js"></script>
     <script src="js/tinymce/js/tinymce_setup.js"></script>
+    <script src="./js/bootstrap/js/bootstrap.min.js"></script>
 </head>
 
 <body>
@@ -39,7 +40,7 @@
                 <div class="form-group">
                     <label for="inputEmail3" class="col-sm-2 control-label">文章类别：</label>
                     <div class="col-sm-4">
-                        <select class="form-control">
+                        <select class="form-control" id="Categories">
                             <option>1</option>
                             <option>2</option>
                             <option>3</option>
@@ -72,14 +73,72 @@
                 </div>
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                        <button type="submit" class="btn btn-success">发布</button>
-                        <button type="submit" class="btn btn-default">存为草稿</button>
+                        <button type="submit" class="btn btn-success btn-release">发布</button>
+                        <button type="submit" class="btn btn-default btn-Draft">存为草稿</button>
                     </div>
                 </div>
             </form>
         </div>
     </div>
+    <script>
+        $(function () {
 
+            
+            function setAjax() {
+                //获取文章标题
+                var title = $("#inputEmail3").val();
+                
+                //获取文件内容
+                //上传文件,change 事件
+                var file=$("#exampleInputFile")[0].files[0];
+             
+
+                //获取文章类别
+                var Categories = $("#Categories").val()
+                $("#Categories").change(function () {
+                    Categories = $(this).val();
+                })
+                
+                //获取发表时间
+                var dateinput = $("#dateinput").val();
+                
+                //获取文章内容
+                var content = $("#rich_content").text();
+
+                //提交ajax请求
+                $.ajax({
+                    url: "http://localhost:8000/admin/article_publish",
+                    type: "post",
+                    data: {
+                        title: title,
+                        cover: file,
+                        pid: Categories,
+                        date: dateinput,
+                        content: content
+                    },
+                    success: function (backData) {
+                        console.log(backData);
+
+                    }
+                })
+            }
+
+            $(".btn-release").click(function (e) {
+                e.preventDefault();
+                setAjax();
+            })
+
+            $(".btn-Draft").click(function (e) {
+                e.preventDefault();
+                setAjax();
+            })
+
+        })
+
+
+
+
+    </script>
 </body>
 
 </html>
