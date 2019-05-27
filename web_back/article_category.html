@@ -80,7 +80,7 @@
             </table>
         </div>
     </div>
-
+    <!-- 隐藏的模态框 -->
     <div class="modal fade" id="addModal">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -90,13 +90,15 @@
                 </div>
                 <div class="modal-body">
                     <form>
+                        <!-- 隐藏域,用来储存id值 -->
+                        <input type="hidden" name="id">
                         <div class="form-group">
                             <label for="recipient-name" class="control-label">分类名称:</label>
-                            <input type="text" class="form-control" id="rec-name">
+                            <input type="text" class="form-control" id="rec-name" name="name">
                         </div>
                         <div class="form-group">
                             <label for="message-text" class="control-label">分类别名:</label>
-                            <input type="text" class="form-control" id="rec-slug">
+                            <input type="text" class="form-control" id="rec-slug" name="slug">
                         </div>
                     </form>
                 </div>
@@ -115,7 +117,7 @@
         });
 
         $('#model_shutoff').click(function () {
-            alert('shutoff');
+            // alert('shutoff');
             $('#addModal').modal('hide');
         });
 
@@ -128,6 +130,8 @@
             if ($(this).hasClass('btn-info')) {
                 $('#addModal .modal-title').html('修改分类名称');
                 $('#addModal').modal('show');
+                $("#model_add").text("修改").removeClass("btn-success")
+
             }
         })      
     </script>
@@ -137,9 +141,10 @@
                 <td>{{$value.name}}</td>
                 <td>{{$value.slug}}</td>
                 <td class="text-center">
-                    <a href="javascript:editTr({&quot;id&quot;:&quot;4&quot;,&quot;slug&quot;:&quot;travel&quot;,&quot;name&quot;:&quot;爱旅行&quot;});"
+                    <a href='javascript:editTr({"id":"{{$value.id}}","name":"{{$value.name}}","slug":"{{$value.slug}}"});'
                         class="btn btn-info btn-xs">编辑</a>
-                    <a href="javascript:" Categories_id="{{$value.id}}" class="btn btn-danger btn-xs Categories_del">删除</a>
+                    <!-- <a href="javascript:" Categories_id="{{$value.id}}" class="btn btn-danger btn-xs Categories_del">删除</a> -->
+                    <a href="javascript:deleteTr( {{$value.id}} )" class="btn btn-danger btn-xs Categories_del">删除</a>
                 </td>
             </tr>
         {{/each}}
@@ -148,7 +153,7 @@
         //===========删除文章类别=============
         /*
          获取文章分类信息
-           请求地址：https://autumnfish.cn/big32/admin/category_search
+           请求地址：http://localhost:8000/admin/category_search
            请求方式：get
            请求参数：无
            步骤
@@ -159,7 +164,7 @@
                文章新增
 
        新增分类
-           请求地址：https://autumnfish.cn/big32/admin/category_add
+           请求地址：http://localhost:8000/admin/category_add
            请求方式：post
            请求参数：
            步骤
@@ -176,7 +181,7 @@
             // 封装请求函数
             function setAjax() {
                 $.ajax({
-                    url: "https://autumnfish.cn/big32/admin/category_search",
+                    url: "http://localhost:8000/admin/category_search",
                     type: "get",
                     success: function (backData) {
                         var html = template("tempCate", backData);
@@ -186,49 +191,110 @@
             };
 
             setAjax();  //页面加载时执行一次请求
+            // css("backgroundColor","")
+            $(".btn-success").click(function () {
+                $('#addModal .modal-title').html('新增分类');
+                $(".modal-footer #model_add").text("新增").addClass('btn-success')
+                $("#rec-name").val("")
+                $("#rec-slug").val("")
+            })
 
             //点击新增文章类别按钮事件
-            $("#model_add").click(function(){
-                var name=$("#rec-name").val().trim();   //去除文章名字前后的空格
-                var slug=$("#rec-slug").val().trim();   //去除文章类别前后的空格
-                if(name==""||slug==""){     //如果文章名字或者类别为空
+            $("#model_add").click(function () {
+                var name = $("#rec-name").val().trim();   //去除文章名字前后的空格
+                var slug = $("#rec-slug").val().trim();   //去除文章类别前后的空格
+                if (name == "" || slug == "") {     //如果文章名字或者类别为空
                     return;     //不执行下面的代码
-                }else{
-                    $.ajax({
-                        url:"https://autumnfish.cn/big32/admin/category_add",
-                        type:"post",
-                        data:{
-                            name:name,
-                            slug:slug
-                        },
-                        success:function(backData){
-                            $('#addModal').modal('hide');   //隐藏输入框
-                            if(backData.code==200){     //如果返回值200正常
-                                setAjax();      //再调用一次请求事件
+                } else {
+                    if ($(".modal-footer #model_add").text() == "新增") {
+                        //如果按钮是新增,那么现在调用新增文章的接口
+                        $.ajax({
+                            url: "http://localhost:8000/admin/category_add",
+                            type: "post",
+                            data: {
+                                name: name,
+                                slug: slug
+                            },
+                            success: function (backData) {
+                                
+                                if (backData.code == 200) {     //如果返回值200正常
+                                    $('#addModal').modal('hide');   //隐藏输入框
+                                    setAjax();      //再调用一次请求事件
+                                    $("#rec-name").val("")
+                                    $("#rec-slug").val("")
+                                }
                             }
-                        }
-                    })
+                        })
+                    } else {
+                        //如果不是新增,那么肯定是修改
+                        $.ajax({
+                            url: "http://localhost:8000/admin/category_edit",
+                            type: "post",
+                            data: $("form").serialize(),
+                            success: function (backData) {
+                                
+                                if (backData.code == 200) {     //如果返回值200正常
+                                    $('#addModal').modal('hide');   //隐藏输入框
+                                    setAjax();      //再调用一次请求事件
+                                }
+                            }
+                        })
+                    }
+
                 }
             })
 
-            //点击删除当前文章类别
-            $(".category_table tbody").on("click",".Categories_del",function(e){
-                e.preventDefault()
-                var id=Number($(this).attr("Categories_id"));
-                console.log(id);
-                
+            // //点击删除当前文章类别
+            // $(".category_table tbody").on("click",".Categories_del",function(e){
+            //     e.preventDefault()
+            //     var id=Number($(this).attr("Categories_id"));
+            //     console.log(id);
+
+            //     $.ajax({
+            //         url:"http://localhost:8000/admin/category_delete",
+            //         type:"post",
+            //         data:{
+            //             id:id
+            //         },
+            //         success:function(backData){
+            //             console.log(backData);
+            //             if(backData.code==200){
+            //                 setAjax();
+            //             }
+
+            //         }
+            //     })
+            // })
+
+            //封装一个函数,用来给删除按钮的a标签调用
+
+            // a标签调用js方法  href="javascript:deleteTr( )
+
+            // <a href="javascript:deleteTr( {{$value.id}} )" class="btn btn-danger btn-xs Categories_del">删除</a>
+            window.deleteTr = function (id) {
                 $.ajax({
-                    url:"http://localhost:8000/admin/category_delete",
-                    type:"post",
-                    data:{
-                        id:id
+                    url: "http://localhost:8000/admin/category_delete",
+                    type: "post",
+                    data: {
+                        id: id
                     },
-                    success:function(backData){
-                        console.log(backData);
-                        setAjax();
+                    success: function (backData) {
+                        if (backData.code == 200) {
+                            setAjax();
+                        }
                     }
                 })
-            })
+            }
+
+            //封装一个函数,用来给编辑按钮的a标签调用
+            window.editTr = function (data) {
+                // data的值由a标签调用时传进来
+                for (var key in data) {
+                    //遍历a标签传进来的对象,设置弹出的表单的value值
+                    $("input[name=" + key + "]").val(data[key])
+                }
+            }
+
         })
 
 

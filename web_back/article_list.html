@@ -12,6 +12,9 @@
     <link rel="stylesheet" href="css/main.css">
     <script src="js/jquery-1.12.4.min.js"></script>
     <script src="./js/template-web.js"></script>
+    <script src="./js/bootstrap/js/bootstrap.min.js"></script>
+    <script src="./js/jquery.twbsPagination.min.js"></script>
+    
 </head>
 
 <body>
@@ -58,7 +61,7 @@
 
 
 
-                    <tr>
+                    <!-- <tr>
 
                         <td>王积千造统最头</td>
                         <td>杰克</td>
@@ -244,7 +247,7 @@
                             <a href="post-edit.html?id=995" class="btn btn-default btn-xs">编辑</a>
                             <a href="javascript:deleteTr( 995 );" class="btn btn-danger btn-xs">删除</a>
                         </td>
-                    </tr>
+                    </tr> -->
 
 
                 </tbody>
@@ -350,16 +353,16 @@
                 url: "http://localhost:8000/admin/search",
                 type: "get",
                 data: {
-                    key: "",
-                    type: Categories,
-                    state: state,
                     page: 1,
                     perpage: 6
                 },
                 success: function (backData) {
                     //设置文章内容
+                    console.log(backData);
                     var html = template("tempCate", backData);
                     $("tbody").html(html);
+                    
+                    
                 }
             })
         };
