@@ -11,10 +11,12 @@
     <link rel="stylesheet" href="css/iconfont.css">
     <link rel="stylesheet" href="css/main.css">
     <script src="js/jquery-1.12.4.min.js"></script>
+    <!-- 导入模板引擎 -->
     <script src="./js/template-web.js"></script>
     <script src="./js/bootstrap/js/bootstrap.min.js"></script>
+    <!-- 导入翻页栏js文件 -->
     <script src="./js/jquery.twbsPagination.min.js"></script>
-    
+
 </head>
 
 <body>
@@ -27,16 +29,16 @@
                 <div class="col-xs-6">
                     <form class="form-inline">
                         <select id="selCategory" name="" class="form-control input-sm">
-                            <option>所有分类</option>
-                            <option>未分类</option>
+                            <option value="">所有分类</option>
+                            <!-- <option>未分类</option>
                             <option>奇趣事</option>
                             <option>会生活</option>
-                            <option>爱旅行</option>
+                            <option>爱旅行</option> -->
                         </select>
                         <select id="selStatus" name="" class="form-control input-sm">
-                            <option>所有状态</option>
-                            <option value="drafted">草稿</option>
-                            <option value="published">已发布</option>
+                            <option value="">所有状态</option>
+                            <option value="草稿">草稿</option>
+                            <option value="已发布">已发布</option>
                         </select>
                         <button id="btnSearch" class="btn btn-default btn-sm">筛选</button>
                     </form>
@@ -61,200 +63,12 @@
 
 
 
-                    <!-- <tr>
-
-                        <td>王积千造统最头</td>
-                        <td>杰克</td>
-                        <td>奇趣事</td>
-                        <td class="text-center">2017-06-08 07:08:46</td>
-
-
-                        <td class="text-center">已发布</td>
-
-
-                        <td class="text-center">
-                            <a href="article_edit.html" class="btn btn-default btn-xs">编辑</a>
-                            <a href="javascript:deleteTr( 1005 );" class="btn btn-danger btn-xs">删除</a>
-                        </td>
-                    </tr>
-
-
-
-                    <tr>
-
-                        <td>级电使正回</td>
-                        <td>肉丝</td>
-                        <td>爱旅行</td>
-                        <td class="text-center">2017-06-06 10:45:24</td>
-
-
-                        <td class="text-center">已发布</td>
-
-
-                        <td class="text-center">
-                            <a href="article_edit.html" class="btn btn-default btn-xs">编辑</a>
-                            <a href="javascript:deleteTr( 1004 );" class="btn btn-danger btn-xs">删除</a>
-                        </td>
-                    </tr>
-
-
-
-                    <tr>
-
-                        <td>近难领管年算</td>
-                        <td>杰克</td>
-                        <td>会生活</td>
-                        <td class="text-center">2017-05-27 16:49:04</td>
-
-
-                        <td class="text-center">已发布</td>
-
-
-                        <td class="text-center">
-                            <a href="article_edit.html" class="btn btn-default btn-xs">编辑</a>
-                            <a href="javascript:deleteTr( 1003 );" class="btn btn-danger btn-xs">删除</a>
-                        </td>
-                    </tr>
-
-
-
-                    <tr>
-
-                        <td>龙大实究</td>
-                        <td>杰克</td>
-                        <td>未分类</td>
-                        <td class="text-center">2017-04-13 10:43:41</td>
-
-
-                        <td class="text-center">草稿</td>
-
-
-                        <td class="text-center">
-                            <a href="post-edit.html?id=1002" class="btn btn-default btn-xs">编辑</a>
-                            <a href="javascript:deleteTr( 1002 );" class="btn btn-danger btn-xs">删除</a>
-                        </td>
-                    </tr>
-
-
-
-                    <tr>
-
-                        <td>算性得走来拉</td>
-                        <td>肉丝</td>
-                        <td>奇趣事</td>
-                        <td class="text-center">2017-04-06 04:58:12</td>
-
-
-                        <td class="text-center">已发布</td>
-
-
-                        <td class="text-center">
-                            <a href="post-edit.html?id=1001" class="btn btn-default btn-xs">编辑</a>
-                            <a href="javascript:deleteTr( 1001 );" class="btn btn-danger btn-xs">删除</a>
-                        </td>
-                    </tr>
-
-
-
-                    <tr>
-
-                        <td>几平会出气</td>
-                        <td>管理员</td>
-                        <td>奇趣事</td>
-                        <td class="text-center">2017-04-03 20:16:34</td>
-
-
-                        <td class="text-center">草稿</td>
-
-
-                        <td class="text-center">
-                            <a href="post-edit.html?id=1000" class="btn btn-default btn-xs">编辑</a>
-                            <a href="javascript:deleteTr( 1000 );" class="btn btn-danger btn-xs">删除</a>
-                        </td>
-                    </tr>
-
-
-
-                    <tr>
-
-                        <td>世团先证型角</td>
-                        <td>杰克</td>
-                        <td>奇趣事</td>
-                        <td class="text-center">2017-04-03 14:40:08</td>
-
-
-                        <td class="text-center">已发布</td>
-
-
-                        <td class="text-center">
-                            <a href="post-edit.html?id=999" class="btn btn-default btn-xs">编辑</a>
-                            <a href="javascript:deleteTr( 999 );" class="btn btn-danger btn-xs">删除</a>
-                        </td>
-                    </tr>
-
-
-
-                    <tr>
-
-                        <td>构更反步五</td>
-                        <td>肉丝</td>
-                        <td>奇趣事</td>
-                        <td class="text-center">2017-03-30 22:31:52</td>
-
-
-                        <td class="text-center">已发布</td>
-
-
-                        <td class="text-center">
-                            <a href="post-edit.html?id=998" class="btn btn-default btn-xs">编辑</a>
-                            <a href="javascript:deleteTr( 998 );" class="btn btn-danger btn-xs">删除</a>
-                        </td>
-                    </tr>
-
-
-
-                    <tr>
-
-                        <td>组方些</td>
-                        <td>肉丝</td>
-                        <td>会生活</td>
-                        <td class="text-center">2017-02-08 05:38:43</td>
-
-
-                        <td class="text-center">草稿</td>
-
-
-                        <td class="text-center">
-                            <a href="post-edit.html?id=996" class="btn btn-default btn-xs">编辑</a>
-                            <a href="javascript:deleteTr( 996 );" class="btn btn-danger btn-xs">删除</a>
-                        </td>
-                    </tr>
-
-
-
-                    <tr>
-
-                        <td>日做发光成</td>
-                        <td>管理员</td>
-                        <td>爱旅行</td>
-                        <td class="text-center">2017-01-26 22:19:59</td>
-
-
-                        <td class="text-center">草稿</td>
-
-
-                        <td class="text-center">
-                            <a href="post-edit.html?id=995" class="btn btn-default btn-xs">编辑</a>
-                            <a href="javascript:deleteTr( 995 );" class="btn btn-danger btn-xs">删除</a>
-                        </td>
-                    </tr> -->
-
 
                 </tbody>
             </table>
 
             <div class="row text-center">
-                <ul class="pagination pagination-sm">
+                <ul class="pagination pagination-sm" id="pagination-demo">
                     <li class="page-item first disabled"><a href="#" class="page-link">首页</a></li>
                     <li class="page-item prev disabled"><a href="#" class="page-link">上一页</a></li>
                     <li class="page-item active"><a href="#" class="page-link">1</a></li>
@@ -271,19 +85,14 @@
 
         </div>
     </div>
-    <!-- <script id="tempCate" type="text/html">
+
+
+    <!-- <script id="tempLi" type="text/html">
         {{each data}}
-            <tr>
-                <td>{{$value.name}}</td>
-                <td>{{$value.slug}}</td>
-                <td class="text-center">
-                    <a href="javascript:editTr({&quot;id&quot;:&quot;4&quot;,&quot;slug&quot;:&quot;travel&quot;,&quot;name&quot;:&quot;爱旅行&quot;});"
-                        class="btn btn-info btn-xs">编辑</a>
-                    <a href="javascript:deleteTr( 4 );" class="btn btn-danger btn-xs">删除</a>
-                </td>
-            </tr>
+            <li class="page-item"><a href="#" class="page-link">{{}}</a></li>
         {{/each}}
     </script> -->
+    <!-- 设置tr的模板引擎 -->
     <script id="tempCate" type="text/html">
         {{each data}}
             <tr>
@@ -299,17 +108,49 @@
             </tr>
         {{/each}}
     </script>
+    <!-- 设置文章类别下拉框的模板引擎 -->
+    <script type="text/html" id="Categories_left">
+        {{each data}}
+            <option value="{{$value.id}}">{{$value.name}}</option>
+        {{/each}}
+    </script>
     <script>
         // 设置左侧菜单
         $('#release_btn').click(function () {
             window.parent.setMenu(1, 1);
         })
     </script>
-
+    <script type="text/html" id="pageList">
+                <li class="page-item first disabled"><a href="#" class="page-link">首页</a></li>
+                <li class="page-item prev disabled"><a href="#" class="page-link">上一页</a></li>
+                <li class="page-item active"><a href="#" class="page-link">1</a></li>
+                {{each pageArr}}
+                <li class="page-item"><a href="#" class="page-link">{{$value}}</a></li>
+                {{/each}}
+               
+                <li class="page-item next"><a href="#" class="page-link">下一页</a></li>
+                <li class="page-item last"><a href="#" class="page-link">尾页</a></li>
+    </script>
 </body>
 
 </html>
 <script>
+
+    //设置翻页栏样式及js
+    // $('#pagination-demo').twbsPagination({
+    //     totalPages: 35,
+    //     visiblePages: 7,
+    //     first: "首页",
+    //     prev: "上一页",
+    //     next: "下一页",
+    //     last: "尾页",
+
+    //     onPageClick: function (event, page) {
+    //         $('#page-content').text('Page ' + page);
+    //     }
+    // });
+
+
     // $(function () {
     //     var Categories = $("#selCategory")
     //     $("#selCategory").click(function () {
@@ -328,121 +169,165 @@
 <script>
     //==============================================
     $(function () {
-        //下拉框被点击时,记录当前点击的value值
-        // var Categories = $("#selCategory")
-        var Categories = ""
-        $("#selCategory").click(function () {
-            Categories = $(this).val();
-            if (Categories == "所有分类") {
-                Categories = "";
-            }
-        })
-        // var state = $("#selStatus")
-        var state = ""
-        $("#selStatus").click(function () {
-            state = $(this).val();
-            if (state == "所有状态") {
-                state = "";
-            }
-        })
+        var myPage = 1;
+        var $pagination = $('#pagination-demo');    //选择按钮的ul标签
+        var defaultOpts = {     //声明变量,为最大页数
+            totalPages: 20
+        };
 
         //=================筛选功能完成================================
         // 封装请求函数
-        function setAjax() {
+        function setAjax(thisPage) {
             $.ajax({
                 url: "http://localhost:8000/admin/search",
                 type: "get",
                 data: {
-                    page: 1,
+                    type: $("#selCategory").val(),   //把下拉框的value传入ajax请求函数中
+                    state: $("#selStatus").val(),    //把下拉框的value传入ajax请求函数中
+                    page: thisPage||1,
                     perpage: 6
                 },
                 success: function (backData) {
                     //设置文章内容
-                    console.log(backData);
+
                     var html = template("tempCate", backData);
                     $("tbody").html(html);
-                    
-                    
                 }
             })
         };
-        setAjax();  //页面加载时执行一次请求
 
-        //数组去重函数
-        function uniq(array) {
-            var temp = [];
-            var index = [];
-            var l = array.length;
-            for (var i = 0; i < l; i++) {
-                for (var j = i + 1; j < l; j++) {
-                    if (array[i] == array[j]) {
-                        i++;
-                        j = i;
-                    }
-                }
-                temp.push(array[i]);
-                index.push(i);
-            }
-            return temp;
-        }
-
-
-        //获取所有的分类,并添加到所有分类
+        //页面加载时执行一次请求
         $.ajax({
             url: "http://localhost:8000/admin/search",
             type: "get",
             data: {
+                type: $("#selCategory").val(),   //把下拉框的value传入ajax请求函数中
+                state: $("#selStatus").val(),    //把下拉框的value传入ajax请求函数中
+                page: 1,
+                perpage: 6
             },
             success: function (backData) {
-                //获取并设置所有的文章类别
-                var arr = [];
-                var arr1 = [];
-                for (var i = 0; i < backData.data.length; i++) {
-                    arr.push(backData.data[i].type);
-                    arr1.push(backData.data[i].state);
-                }
-                arr = uniq(arr);
-                var html = "<option>所有分类</option>";
-                for (var i = 0; i < arr.length; i++) {
-                    html += "<option>" + arr[i] + "</option>"
-                }
-                $("#selCategory").html(html);
+                //设置文章内容
 
-                //获取并设置所有的文章发布状态
-                arr1 = uniq(arr1);
-                var html = "<option>所有状态</option>";
-                for (var i = 0; i < arr1.length; i++) {
-                    html += "<option>" + arr1[i] + "</option>"
+                var pageArr = [];
+                var maxPages = backData.totalPage;  //获取当前
+                if (maxPages > 7) {
+                    maxPages = 7
                 }
-                $("#selStatus").html(html);
+                for (var i = 1; i < maxPages; i++) {
+                    pageArr.push(i + 1)
+                }
+                pageArr = { pageArr: pageArr }
+                var pageNums = template("pageList", pageArr)
+                $("#pagination-demo").html(pageNums)
+                var html = template("tempCate", backData);
+                $("tbody").html(html);
+            }
+        })
+        //设置页码的函数
+        // function pageArr(backData) {
+        //     var pageArr = [];
+        //     var maxPages = backData;  //获取当前
+        //     if (maxPages > 7) {
+        //         maxPages = 7
+        //     }
+        //     for (var i = 1; i < maxPages; i++) {
+        //         pageArr.push(i + 1)
+        //     }
+        //     pageArr = { pageArr: pageArr }
+        //     console.log(pageArr);
+        //     var pageNums = template("pageList", pageArr)
+        //     $("#pagination-demo").html(pageNums)
+        // }
+
+
+
+
+        //获取并设置所有类别
+        $.ajax({
+            url: "http://localhost:8000/admin/category_search",
+            type: "get",
+            success: function (backData) {
+                var html = template("Categories_left", backData);
+                $("#selCategory").append(html)
             }
         })
 
-        //筛选按钮点击时,把下拉框的value传入ajax请求函数中
+        //========设置分页=============
+
+        $pagination.twbsPagination(defaultOpts);    //调用分页插件的方法,设置总页数
+        function setPage() {
+            $.ajax({
+                url: "http://localhost:8000/admin/search",  //调用ajax接口,获取搜索文章的数据
+                type: "get",
+                data: {
+                    type: $("#selCategory").val(),   //把下拉框的value传入ajax请求函数中
+                    state: $("#selStatus").val(),    //把下拉框的value传入ajax请求函数中
+                    page: myPage,
+                    perpage: 6
+                },
+                success: function (data) {
+
+                    var totalPages = data.totalPage;    //最大页码
+                    var maxPages = data.totalPage;  //获取当前显示的页码(1-7)
+                    if (maxPages > 7) {
+                        maxPages = 7
+                    }
+                    console.log(maxPages);
+                    
+                    // pageArr(maxPages)
+                    $pagination.twbsPagination('destroy');
+                    $pagination.twbsPagination($.extend({}, defaultOpts, {
+                        startPage: 1, //设置刷新时第一个页码
+                        totalPages: totalPages, // 总页数
+                        visiblePages: maxPages, // 当前显示的页码个数
+                        first: "首页",
+                        prev: "上一页",
+                        next: "下一页",
+                        last: "尾页",
+                        onPageClick: function (event, page) {
+                            var thisPage = $("#pagination-demo .active a").text();    //获取当前的分页页码
+                            event.preventDefault()      // 阻止默认事件
+                            page = myPage;  //
+                            $('#page-content').text('Page ' + page);
+                            setAjax(thisPage)
+                        }
+                    }));
+
+                }
+            });
+        }
+        setPage()
+        //===========设置分页结束==========
+
+
+
+        //筛选按钮点击时,
         $("#btnSearch").click(function (e) {
             e.preventDefault();
 
             // 提交ajax请求,并设置数据
-            setAjax()
+            setPage()
+            
         })
         //=================筛选功能完成================================
 
         //=================删除文章功能开始==================================
-       
-        $(".table-bordered tbody").on("click",".btn-delete",function(){
-            var id=Number($(this).attr("article_id"));
+
+        $(".table-bordered tbody").on("click", ".btn-delete", function () {
+            var id = Number($(this).attr("article_id"));
             $.ajax({
-                url:"http://localhost:8000/admin/article_delete",
-                type:"get",
-                data:{
-                    id:id
+                url: "http://localhost:8000/admin/article_delete",
+                type: "get",
+                data: {
+                    id: id
                 },
-                success:function(backData){
-                    if(backData.code==200){
+                success: function (backData) {
+                    if (backData.code == 200) {
                         console.log(backData.msg);
                         setAjax(); //删除完之后重新请求数据,再渲染一次
                     }
-                    
+
                 }
             })
         })
